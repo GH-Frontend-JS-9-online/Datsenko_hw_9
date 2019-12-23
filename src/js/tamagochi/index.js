@@ -86,7 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     btnStart.addEventListener('click', function () {
-        (selectLevel.value !== 'Lazy' && selectLevel.value !== 'Pug') ?
+        (selectLevel.value !== 'Lazy'
+         && selectLevel.value !== 'Pug'
+         && selectLevel.value !== 'Ninja') ?
         alert('Select level game'): startGame(tamagochi, selectLevel.value)
     })
 
@@ -136,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startGame(tamagochi, levelGame) {
-        let step = (levelGame === 'Lazy') ? 3 : 5
+        let step = (levelGame === 'Lazy') ? 3 : (levelGame === 'Pug') ? 5 : 7
         unblockControlBtn()
         var amountTime = 0
         let timerId = setInterval(function () {
@@ -152,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
             healthItem.innerHTML = tamagochi.getHealth()
             socializationItem.innerHTML = tamagochi.getSocialization()
             moneyItem.innerHTML = tamagochi.getMoney()
-
             amountTime++
             if (checkResult(tamagochi)) {
                 showTotalTime(amountTime * 1000)
@@ -160,6 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 foodItem.innerHTML = 0
                 cleanItem.innerHTML = 0
                 happinessItem.innerHTML = 0
+                health.innerHTML = 0
+                socialization.innerHTML = 0
+                money.innerHTML = 0
                 setTimeout(newGame, 3000)
                 clearInterval(timerId)
             }
